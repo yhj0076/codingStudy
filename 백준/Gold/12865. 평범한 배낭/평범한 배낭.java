@@ -12,13 +12,7 @@ public class Main {
         int n = Integer.parseInt(st.nextToken());
         int k = Integer.parseInt(st.nextToken());
 
-        List<List<Integer>> allValue = new ArrayList<>();
-
-        List<Integer> zeroValue = new ArrayList<>();
-        for (int i = 0; i <= n; i++) {
-            zeroValue.add(0);
-        }
-        allValue.add(zeroValue);
+        int[][] allValue = new int[k+1][n+1];
 
         List<theThing> things = new ArrayList<>();
 
@@ -36,8 +30,6 @@ public class Main {
         }
 
         for (int nowWeight = 1; nowWeight <= k; nowWeight++) {
-            List<Integer> maxValue = new ArrayList<>();
-            maxValue.add(0);
             for (int thingNum = 1; thingNum < things.size(); thingNum++) {
                 theThing nowThing = things.get(thingNum);
 
@@ -46,15 +38,14 @@ public class Main {
                     leftWeight = 0;
                 }
 
-                int plusValue = allValue.get(leftWeight).get(thingNum-1) +  (nowWeight >= nowThing.weight + leftWeight ? nowThing.value : 0);
+                int plusValue = allValue[leftWeight][thingNum-1] +  (nowWeight >= nowThing.weight + leftWeight ? nowThing.value : 0);
 
-                int max = Math.max(plusValue,maxValue.get(thingNum-1));
-                maxValue.add(max);
+                int max = Math.max(plusValue,allValue[nowWeight][thingNum-1]);
+                allValue[nowWeight][thingNum] = max;
             }
-            allValue.add(maxValue);
         }
 
-        System.out.println(allValue.get(k).get(n));
+        System.out.println(allValue[k][n]);
     }
     
     public static class theThing{
