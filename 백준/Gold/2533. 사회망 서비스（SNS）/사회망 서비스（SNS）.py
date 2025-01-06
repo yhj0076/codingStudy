@@ -1,16 +1,12 @@
 import sys
 
-sys.setrecursionlimit(1000001)
+sys.setrecursionlimit(1000000)
 
 n = int(input())
 
-graph = []
-visited = []
-dp = []
-for i in range(n+1):
-    graph.append([])
-    visited.append(False)
-    dp.append([0,0])
+graph = [[] for _ in range(n+1)]
+visited = [False for _ in range(n+1)]
+dp = [[0,0] for _ in range(n+1)]
 
 for i in range(n-1):
     start, end = map(int, sys.stdin.readline().split())
