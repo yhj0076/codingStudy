@@ -56,7 +56,7 @@ public class Starter
         while (answer.Count < dict.Count)
         {
             bool isCircle = true;
-            Queue<string> nextQueue = new Queue<string>();
+            PriorityQueue<string,string> nextQueue = new PriorityQueue<string,string>();
             while (priorityQueue.Count > 0)
             {
                 string item = priorityQueue.Dequeue();
@@ -68,7 +68,7 @@ public class Starter
                     if (dict[neighbor].InDegree == 0)
                     {
                         isCircle = false;
-                        nextQueue.Enqueue(neighbor);
+                        nextQueue.Enqueue(neighbor,neighbor);
                     }
                 }
             }
@@ -77,14 +77,8 @@ public class Starter
             {
                 break;
             }
-
-            if (nextQueue.Count > 0)
-            {
-                foreach (var nextItem in nextQueue)
-                {
-                    priorityQueue.Enqueue(nextItem, nextItem);
-                }
-            }
+            
+            priorityQueue = nextQueue;
         }
 
         if (answer.Count == dict.Count)
