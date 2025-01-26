@@ -53,6 +53,8 @@ public class Starter
         
         List<string> answer = new List<string>();   // 결과를 저장할 리스트
 
+        var answerCount = 0;
+        
         while (answer.Count < dict.Count)
         {
             bool isCircle = true;
@@ -61,6 +63,7 @@ public class Starter
             {
                 string item = priorityQueue.Dequeue();
                 answer.Add(item);
+                answerCount++;
                 // 연결된 노드들의 진입 차수 감소
                 foreach (var neighbor in dict[item].Edges)
                 {
@@ -81,7 +84,7 @@ public class Starter
             priorityQueue = nextQueue;
         }
 
-        if (answer.Count == dict.Count)
+        if (answerCount == dict.Count)
         {
             Console.WriteLine(string.Join("\n", answer));
         }
