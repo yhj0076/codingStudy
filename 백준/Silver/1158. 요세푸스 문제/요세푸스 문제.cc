@@ -1,30 +1,33 @@
 #include <iostream>
+#include <vector>
+
+using namespace std;
 
 int main(int argc, char *argv[]) {
     int n, k;
     std::cin >> n >> k;
 
-    int circle[n];
-    for (int i = 0; i < n; ++i) {
-        circle[i] = i + 1;
+    vector<int> circle;
+    for (int i = 0; i < n; i++) {
+        circle.push_back(i+1);
     }
 
-    int pointer = n - 1;
-    int result[n];
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < k; ++j) {
-            do {
-                pointer = (pointer + 1) % n;
-            } while (circle[pointer] == 0);
+    int pointer = 0;
+    vector<int> result;
+    for (int i = 0; i < n; i++) {
+        pointer = (pointer + k - 1) % circle.size();
+        result.push_back(circle[pointer]);
+        circle.erase(circle.begin() + pointer);
+    }
+
+    cout << "<";
+    for (int i = 0; i < result.size(); i++) {
+        cout << result[i];
+        if (i != result.size() - 1) {
+            cout << ", ";
         }
-        result[i] = circle[pointer];
-        circle[pointer] = 0;
     }
+    cout << ">" << endl;
 
-    std::cout << "<";
-    for (int i = 0; i < n-1; ++i) {
-        std::cout << result[i] << ", ";
-    }
-    std::cout << result[n-1] << ">";
     return 0;
 }
