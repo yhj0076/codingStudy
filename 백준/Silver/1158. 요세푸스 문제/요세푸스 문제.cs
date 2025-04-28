@@ -6,25 +6,19 @@ public class Starter
         int n = int.Parse(input[0]);
         int k = int.Parse(input[1]);
         
-        int[] circle = new int[n];
+        List<int> circle = new List<int>();
         for (int i = 0; i < n; i++)
         {
-            circle[i] = i + 1;
+            circle.Add(i + 1);
         }
 
-        int pointer = n - 1;
+        int pointer = 0;
         int[] result = new int[n];
         for (int i = 0; i < n; i++)
         {
-            for (int j = 0; j < k; j++)
-            {
-                do
-                {
-                    pointer = (pointer + 1) % n;
-                } while (circle[pointer] == 0);
-            }
+            pointer = (pointer + k - 1) % circle.Count;
             result[i] = circle[pointer];
-            circle[pointer] = 0;
+            circle.RemoveAt(pointer);
         }
 
         Console.WriteLine($"<{string.Join(", ", result)}>");
