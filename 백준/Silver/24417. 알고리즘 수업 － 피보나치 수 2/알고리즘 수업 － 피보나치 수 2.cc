@@ -1,25 +1,44 @@
 #include <iostream>
-
 using namespace std;
+
 const int MOD = 1000000007;
 
-int fibonacci(int n) {
-    int num1 = 1;
-    int num2 = 1;
-    int num3 = 2;
+// 행렬 곱셈 함수
+void multiply(long long F[2][2], long long M[2][2]) {
+    long long x = (F[0][0] * M[0][0] % MOD + F[0][1] * M[1][0] % MOD) % MOD;
+    long long y = (F[0][0] * M[0][1] % MOD + F[0][1] * M[1][1] % MOD) % MOD;
+    long long z = (F[1][0] * M[0][0] % MOD + F[1][1] * M[1][0] % MOD) % MOD;
+    long long w = (F[1][0] * M[0][1] % MOD + F[1][1] * M[1][1] % MOD) % MOD;
 
-    for (int i = 2; i < n; i++) {
-        num3 = num1 + num2;
-        if (num3 > MOD)
-            num3 -= MOD;
-        num1 = num2;
-        num2 = num3;
-    }
-
-    return num3;
+    F[0][0] = x;
+    F[0][1] = y;
+    F[1][0] = z;
+    F[1][1] = w;
 }
 
-int main(int argc, char *argv[]) {
+// 지수승 함수
+void power(long long F[2][2], int n) {
+    if (n == 0 || n == 1) return;
+
+    long long M[2][2] = {{1, 1}, {1, 0}};
+    power(F, n / 2);
+    multiply(F, F);
+
+    if (n % 2 != 0)
+        multiply(F, M);
+}
+
+// 피보나치 수 계산
+int fibonacci(int n) {
+    if (n == 0) return 0;
+
+    long long F[2][2] = {{1, 1}, {1, 0}};
+    power(F, n - 1);
+
+    return F[0][0];
+}
+
+int main() {
     int num;
     cin >> num;
 
