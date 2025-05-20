@@ -1,26 +1,14 @@
 #include <iostream>
-
-using namespace std;
-
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
 
-    int t;
-    cin >> t;
-
+    int t, n, m, u, v;
+    std::cin >> t;
     while (t--) {
-        int n, m;
-        cin >> n >> m;
-
-        // 간선 입력 무시
-        for (int i = 0; i < m; ++i) {
-            int u, v;
-            cin >> u >> v;
-        }
-
-        cout << (n - 1) << '\n';
+        std::cin >> n >> m;
+        while (m--) std::cin >> u >> v; // 입력 무시
+        std::cout << (n - 1) << '\n';
     }
-
-    return 0;
 }
+
