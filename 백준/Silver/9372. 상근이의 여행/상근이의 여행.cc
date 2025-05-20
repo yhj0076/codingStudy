@@ -1,31 +1,25 @@
 #include <iostream>
-#include <vector>
 
 using namespace std;
 
-vector<int> answer;
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
 
-int main(int argc, char *argv[]) {
     int t;
     cin >> t;
 
-    for (int i = 0; i < t; i++) {
-        int n;
-        int m;
-
+    while (t--) {
+        int n, m;
         cin >> n >> m;
 
-        for (int j = 0; j < m; j++) {
-            int from;
-            int to;
-            cin >> from >> to;
+        // 간선 입력 무시
+        for (int i = 0; i < m; ++i) {
+            int u, v;
+            cin >> u >> v;
         }
-        
-        answer.push_back(n-1);
-    }
 
-    for (int i = 0; i < t; i++) {
-        cout << answer[i] << endl;
+        cout << (n - 1) << '\n';
     }
 
     return 0;
